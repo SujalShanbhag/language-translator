@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-fastapi>=0.115,<1
-gunicorn>=23,<24
->>>>>>> f8f386ef310a2b6588aef351e48ddb76816949c2
-edge-tts==7.2.8
-gTTS>=2.5.4,<3
+fastapi
+uvicorn
+httpx
+gtts
