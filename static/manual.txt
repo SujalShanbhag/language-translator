@@ -1,0 +1,349 @@
+LANGUAGE TRANSLATOR
+USER MANUAL
+
+1. ABOUT THIS TRANSLATOR
+
+This Language Translator is a web-based translation application built using HTML, CSS, JavaScript, and Python.
+
+The application allows you to:
+- Enter or paste text.
+- Select the language of the input text.
+- Select the language you want to translate into.
+- Translate the text using an online translation service.
+- Use your computer or device microphone to enter speech as text.
+- Copy the translated result.
+- Listen to the translated result using server-side text-to-speech.
+- View the available language list dynamically.
+
+The application does not use a manually maintained list of languages. The available translation languages are obtained dynamically from the translation service.
+
+2. HOW THE TRANSLATOR WORKS
+
+The application has two main parts:
+
+A. Frontend
+The frontend is the web page that you see in your browser. It is built with:
+- HTML for the page structure.
+- CSS for the appearance and dashboard design.
+- JavaScript for user interaction, language selection, microphone input, translation requests, copying, and speech playback.
+
+B. Python Server
+The Python server:
+- Hosts the frontend files.
+- Provides API endpoints used by the webpage.
+- Retrieves the current language catalog.
+- Sends translation requests to the online translation service.
+- Processes longer text safely by dividing it into smaller pieces when necessary.
+- Provides the server-side text-to-speech function.
+- Sends generated audio back to the browser.
+
+The browser communicates with the Python server, and the Python server communicates with the required online services.
+
+3. HOW TO START THE APPLICATION
+
+For local use:
+
+Step 1:
+Open the project folder in a terminal.
+
+Step 2:
+Run:
+
+python server.py
+
+Step 3:
+The Python server starts and normally opens the translator in your browser.
+
+If the browser does not open automatically, open the local address shown in the terminal.
+
+The default local port is 8000.
+
+4. HOW TO USE TEXT TRANSLATION
+
+Step 1:
+Open the Language Translator.
+
+Step 2:
+In the Source Language box, select the language of the text you are entering.
+
+Step 3:
+In the Target Language box, select the language you want.
+
+Step 4:
+Enter or paste your text into the input text area.
+
+Step 5:
+Click the Translate button.
+
+Step 6:
+Wait for the translation to complete.
+
+Step 7:
+The verified translation is displayed in the output area.
+
+If the translation service cannot be reached or returns an invalid response, the application displays an error instead of showing an unverified translation.
+
+5. SOURCE LANGUAGE
+
+The Source Language tells the translator what language your input text is written in.
+
+For example:
+- If you enter English text, select English.
+- If you enter Hindi text, select Hindi.
+- If you enter French text, select French.
+
+Selecting the correct source language generally gives the translation service better information about the input.
+
+6. TARGET LANGUAGE
+
+The Target Language is the language in which you want to receive the translated result.
+
+For example:
+
+Source: English
+Target: Hindi
+
+The application translates the English input into Hindi.
+
+7. HOW TO USE THE MICROPHONE
+
+The microphone allows you to speak instead of typing.
+
+Step 1:
+Select the Source Language.
+
+Step 2:
+Click the microphone button.
+
+Step 3:
+If the browser asks for microphone permission, allow it.
+
+Step 4:
+Speak clearly into the microphone.
+
+Step 5:
+The browser converts your speech into text.
+
+Step 6:
+The recognized text is placed in the input area.
+
+Step 7:
+Select the Target Language if it has not already been selected.
+
+Step 8:
+Click Translate.
+
+The speech-recognition language is selected dynamically according to the selected source language.
+
+Important:
+Microphone recognition depends on browser support and the permissions given to the browser. A secure website connection or localhost is recommended for microphone access.
+
+8. HOW TO TRANSLATE SPEECH
+
+The complete speech translation process is:
+
+Speak into the microphone
+        ↓
+Browser speech recognition
+        ↓
+Recognized text
+        ↓
+Input text area
+        ↓
+Translation request
+        ↓
+Python server
+        ↓
+Online translation service
+        ↓
+Translated text
+        ↓
+Output area
+
+The microphone itself recognizes speech. The translation system then translates the recognized text.
+
+9. HOW TO COPY THE TRANSLATION
+
+After a translation appears:
+
+Step 1:
+Click the Copy button.
+
+Step 2:
+The translated text is copied to the clipboard.
+
+Step 3:
+You can paste it into another application such as a document, email, message, or notes application.
+
+Clipboard access may depend on browser permissions.
+
+10. HOW TO LISTEN TO THE TRANSLATION
+
+The Speak button uses the Python server's text-to-speech system.
+
+Step 1:
+Translate your text.
+
+Step 2:
+Make sure the translated result is displayed.
+
+Step 3:
+Click the Speak button.
+
+Step 4:
+The server identifies an appropriate voice for the selected target language.
+
+Step 5:
+The server generates audio.
+
+Step 6:
+The browser plays the generated audio.
+
+The application dynamically obtains available server voices instead of using a hardcoded voice-language table.
+
+If a suitable server voice cannot be generated, the application displays an error rather than silently speaking the translation using an unrelated language.
+
+11. TRANSLATION AND SPEECH ARE DIFFERENT
+
+Translation and speech generation are separate operations.
+
+Translation:
+Input text → translated text
+
+Speech:
+Translated text → audio
+
+Therefore, a translation can work even if the speech service is temporarily unavailable.
+
+12. LANGUAGE LIST
+
+The language list is fetched dynamically from the translation service.
+
+This means:
+- The project does not depend on a manually hardcoded language list.
+- The application can obtain the current language catalog when the server is running.
+- The displayed languages come from the service response.
+
+The exact languages available for translation and the exact languages available for speech may differ because translation and text-to-speech services have different capabilities.
+
+13. ERROR HANDLING
+
+The application is designed not to display an unverified translation when the translation service fails.
+
+Possible errors include:
+- Translation service unavailable.
+- Internet connection unavailable.
+- Translation request rejected.
+- Server is not running.
+- Microphone permission denied.
+- Browser does not support speech recognition.
+- Server voice service unavailable.
+- No suitable voice is available for the selected language.
+- Generated audio cannot be played.
+
+If an error appears, read the message displayed by the application and correct the indicated problem.
+
+14. IF THE BACKEND IS OFFLINE
+
+If the page reports that the backend is offline:
+
+Step 1:
+Open a terminal in the project folder.
+
+Step 2:
+Run:
+
+python server.py
+
+Step 3:
+Wait until the Python server starts.
+
+Step 4:
+Reload the translator page.
+
+Do not open the HTML file directly using a file:// address. The application should be accessed through the Python server.
+
+15. INTERNET REQUIREMENT
+
+The application requires an internet connection for its online translation and server-side voice services.
+
+The Python server itself runs locally or on a deployed server, but translation and server voice generation require access to their online services.
+
+For deployment, the hosting platform must allow outbound internet connections.
+
+16. DEPLOYMENT
+
+The project can be deployed as a single Python web service.
+
+Required files include:
+- server.py
+- requirements.txt
+- static/index.html
+- static/style.css
+- static/app.js
+- static/manual.txt
+
+Install the dependencies with:
+
+pip install -r requirements.txt
+
+Start the application with:
+
+python server.py
+
+The server listens on the hosting platform's PORT environment variable when one is provided.
+
+The application binds to 0.0.0.0 so that it can be accessed by a hosting platform.
+
+17. PROJECT FILES
+
+server.py
+Contains the Python web server and API functions.
+
+requirements.txt
+Contains the Python packages required for server-side speech.
+
+static/index.html
+Contains the translator webpage structure.
+
+static/style.css
+Contains the dashboard appearance and layout.
+
+static/app.js
+Contains frontend logic for languages, translation, microphone input, copying, and speech.
+
+static/manual.txt
+Contains this user manual.
+
+18. BASIC WORKFLOW
+
+The normal workflow is:
+
+1. Start the Python server.
+2. Open the translator.
+3. Select Source Language.
+4. Select Target Language.
+5. Type text or use the microphone.
+6. Click Translate.
+7. Read the translated result.
+8. Click Copy if you want to copy it.
+9. Click Speak if you want to hear the translated result.
+
+19. IMPORTANT NOTES
+
+- Keep the Python server running while using the application.
+- Keep an active internet connection for translation and server voice.
+- Allow microphone permission when using speech input.
+- Use a supported modern browser.
+- Select the correct source and target languages.
+- Do not rely on server speech if the selected language has no suitable available voice.
+- If a service is temporarily unavailable, try again later.
+- Do not open index.html directly; use the Python server.
+
+20. SUMMARY
+
+This translator provides a complete text and speech-assisted translation workflow.
+
+It dynamically obtains languages, accepts typed or microphone-generated text, sends the text through the Python server for translation, displays the translated result, allows the result to be copied, and can generate server-side speech for the translated text when a suitable voice is available.
+
+The system is designed to report service failures clearly rather than replace failed translations with an unrelated or unverified result.
